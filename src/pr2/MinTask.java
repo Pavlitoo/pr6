@@ -12,7 +12,7 @@ public class MinTask implements Runnable {
     @Override
     public void run() {
         int min = numbers.stream().min(Integer::compareTo).orElse(0);
-        System.out.println("Minimum: " + min);
+        System.out.println("Мінімум: " + min);
     }
 }
 

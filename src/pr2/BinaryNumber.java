@@ -3,10 +3,10 @@ package pr2;
 
 public class BinaryNumber {
     public static void main(String[] args) {
-        int decimalNumber = 123; // Заданное десятичное число
+        int decimalNumber = 123; // Задане десяткове число
         int binaryOnesCount = countOnesInBinary(decimalNumber);
-        int fullQuartets = binaryOnesCount / 4; // Количество полных тетрад
-        System.out.println("Number of full quartets in binary representation of " + decimalNumber + " is " + fullQuartets);
+        int fullQuartets = binaryOnesCount / 4; // Кількість повних зошит
+        System.out.println("Кількість повних квартетів у двійковому представленні " + decimalNumber + " це " + fullQuartets);
     }
 
     private static int countOnesInBinary(int decimalNumber) {

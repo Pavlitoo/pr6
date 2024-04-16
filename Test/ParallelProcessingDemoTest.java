@@ -19,51 +19,51 @@ public class ParallelProcessingDemoTest {
     }
 
     public static void testUserInput_MinimumOption() {
-        runTestWithUserInput("1", "Вы выбрали минимум:");
+        runTestWithUserInput("1", "Ви обрали мінімум:");
     }
 
     public static void testUserInput_MaximumOption() {
-        runTestWithUserInput("2", "Вы выбрали максимум:");
+        runTestWithUserInput("2", "Ви вибрали максимум:");
     }
 
     public static void testUserInput_AverageOption() {
-        runTestWithUserInput("3", "Вы выбрали среднее значение:");
+        runTestWithUserInput("3", "Ви вибрали середнє значення:");
     }
 
     public static void testUserInput_CriteriaSelectionOption() {
-        runTestWithUserInput("4", "Вы выбрали відбір за критерієм:");
+        runTestWithUserInput("4", "Ви обрали відбір за критерієм:");
     }
 
     public static void testUserInput_StatisticalProcessingOption() {
-        runTestWithUserInput("5", "Вы выбрали статистична обробка:");
+        runTestWithUserInput("5", "Ви вибрали статистична обробка:");
     }
 
-    // Метод для запуска теста с определенным вводом пользователя и ожидаемым выводом
+    // Метод для запуску тесту з певним введенням користувача та очікуваним висновком
     private static void runTestWithUserInput(String input, String expectedOutput) {
-        // Сохраняем стандартный поток вывода
+        // Зберігаємо стандартний потік виведення
         PrintStream originalOut = System.out;
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        // Подготовка ввода пользователя
+        // Підготовка введення користувача
         InputStream originalIn = System.in;
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        // Запуск тестируемого метода
+        // Запуск тестованого методу
         ParallelProcessingDemo.main(new String[]{});
 
-        // Восстанавливаем стандартные потоки
+        // Відновлюємо стандартні потоки
         System.setOut(originalOut);
         System.setIn(originalIn);
 
-        // Получаем вывод программы
+        // Отримуємо виведення програми
         String actualOutput = outContent.toString().trim();
 
-        // Проверяем вывод
+        // Перевіряємо висновок
         if (actualOutput.equals(expectedOutput)) {
-            System.out.println("Тест пройден успешно");
+            System.out.println("Тест пройдено успішно");
         } else {
-            System.out.println("Тест не пройден");
+            System.out.println("Тест не пройдено");
         }
     }
 }

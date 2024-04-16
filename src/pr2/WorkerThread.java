@@ -13,7 +13,6 @@ public class WorkerThread implements Runnable {
     public void run() {
         try {
             while (true) {
-                // Извлечение задачи из очереди и выполнение её
                 Runnable task = taskQueue.take();
                 task.run();
             }

@@ -11,15 +11,13 @@ public class StatisticalProcessingTask implements Runnable {
 
     @Override
     public void run() {
-        // Вычисление среднего значения
         double sum = 0;
         for (int num : numbers) {
             sum += num;
         }
         double average = sum / numbers.size();
-        System.out.println("Среднее значение: " + average);
+        System.out.println("Середнє значення: " + average);
 
-        // Вычисление медианы
         int size = numbers.size();
         double median;
         if (size % 2 == 0) {
@@ -27,14 +25,13 @@ public class StatisticalProcessingTask implements Runnable {
         } else {
             median = numbers.get(size / 2);
         }
-        System.out.println("Медиана: " + median);
+        System.out.println("Медіана: " + median);
 
-        // Вычисление стандартного отклонения
         double variance = 0;
         for (int num : numbers) {
             variance += Math.pow(num - average, 2);
         }
         double standardDeviation = Math.sqrt(variance / size);
-        System.out.println("Стандартное отклонение: " + standardDeviation);
+        System.out.println("Стандартне відхилення: " + standardDeviation);
     }
 }

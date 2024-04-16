@@ -13,7 +13,6 @@ public class CalculationResult implements Serializable {
         this.result = result;
     }
 
-    // Геттеры и сеттеры для всех полей
 
     public int getResult() {
         return result;

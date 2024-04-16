@@ -9,51 +9,51 @@ import java.util.ArrayList;
 
 public class ParallelProcessingDemo {
     public static void main(String[] args) {
-        // Создание коллекции случайных чисел
+    // Створення колекції випадкових чисел
         List<Integer> numbers = generateRandomNumbers(100);
 
-        // Создание пула потоков для выполнения задач
-        ExecutorService executorService = Executors.newFixedThreadPool(5); // Увеличиваем количество потоков
+        // Створення пулу потоків до виконання завдань
+        ExecutorService executorService = Executors.newFixedThreadPool(5); // Збільшуємо кількість потоків
 
-        // Создание очереди задач
+        // Створення черги завдань
         BlockingQueue<Runnable> taskQueue = new LinkedBlockingQueue<>();
 
-        // Добавление задач в очередь
+        // Створення черги завдань
         taskQueue.add(new MinTask(numbers));
         taskQueue.add(new MaxTask(numbers));
         taskQueue.add(new AverageTask(numbers));
-        taskQueue.add(new CriteriaSelectionTask(numbers)); // Добавляем задачу для відбір за критерієм
-        taskQueue.add(new StatisticalProcessingTask(numbers)); // Добавляем задачу для статистична обробка
+        taskQueue.add(new CriteriaSelectionTask(numbers)); 
+        taskQueue.add(new StatisticalProcessingTask(numbers)); 
 
-        // Запуск рабочих потоков
-        for (int i = 0; i < 5; i++) { // Увеличиваем количество потоков
+        
+        for (int i = 0; i < 5; i++) { // Збільшуємо кількість потоків
             executorService.execute(new WorkerThread(taskQueue));
         }
 
-        // Завершение работы ExecutorService
+        
         executorService.shutdown();
 
-        // Получение выбора пользователя
+        
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Выберите операцию:");
-        System.out.println("1. Минимум");
+        System.out.println("Виберіть операцію:");
+        System.out.println("1. Мінімум");
         System.out.println("2. Максимум");
-        System.out.println("3. Среднее значение");
+        System.out.println("3. Среднеє значення");
         System.out.println("4. Відбір за критерієм");
         System.out.println("5. Статистична обробка");
         int choice = scanner.nextInt();
 
         switch (choice) {
             case 1:
-                System.out.println("Вы выбрали минимум:");
+                System.out.println("Ви обрали мінімум:");
                 taskQueue.add(new MinTask(numbers));
                 break;
             case 2:
-                System.out.println("Вы выбрали максимум:");
+                System.out.println("Ви обрали максимум:");
                 taskQueue.add(new MaxTask(numbers));
                 break;
             case 3:
-                System.out.println("Вы выбрали среднее значение:");
+                System.out.println("Ви вибрали середнє значення:");
                 taskQueue.add(new AverageTask(numbers));
                 break;
             case 4:
@@ -61,16 +61,16 @@ public class ParallelProcessingDemo {
                 taskQueue.add(new CriteriaSelectionTask(numbers));
                 break;
             case 5:
-                System.out.println("Вы выбрали статистична обробка:");
+                System.out.println("Ви вибрали статистична обробка:");
                 taskQueue.add(new StatisticalProcessingTask(numbers));
                 break;
             default:
-                System.out.println("Неверный выбор.");
+                System.out.println("Неправильний вибір.");
         }
         scanner.close();
     }
 
-    // Метод для генерации случайных чисел
+    //Метод для генерації випадкових чисел
     private static List<Integer> generateRandomNumbers(int count) {
         Random random = new Random();
         List<Integer> numbers = new ArrayList<>();

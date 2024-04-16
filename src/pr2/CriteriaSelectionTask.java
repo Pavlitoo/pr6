@@ -11,8 +11,8 @@ public class CriteriaSelectionTask implements Runnable {
 
     @Override
     public void run() {
-        // Реализация отбора по критерию (например, отбор четных чисел)
-        System.out.println("Числа, удовлетворяющие критерию (например, четные числа):");
+        // Реалізація відбору за критерієм (наприклад, відбір парних чисел)
+        System.out.println("Числа, які відповідають критерію (наприклад, парні числа):");
         for (int num : numbers) {
             if (num % 2 == 0) {
                 System.out.print(num + " ");

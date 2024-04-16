@@ -21,7 +21,6 @@ public class WorkerThread implements Runnable {
     public void run() {
         try {
             while (true) {
-                // Извлечение задачи из очереди и выполнение её
                 Runnable task = taskQueue.take();
                 task.run();
             }
@@ -30,6 +29,8 @@ public class WorkerThread implements Runnable {
         }
     }
 }
+
+
 ```
 
 
@@ -50,9 +51,10 @@ public class MaxTask implements Runnable {
     @Override
     public void run() {
         int max = numbers.stream().max(Integer::compareTo).orElse(0);
-        System.out.println("Maximum: " + max);
+        System.out.println("Максімум: " + max);
     }
 }
+
 ```
 
 ##   MinTask.java
@@ -72,9 +74,11 @@ public class MinTask implements Runnable {
     @Override
     public void run() {
         int min = numbers.stream().min(Integer::compareTo).orElse(0);
-        System.out.println("Minimum: " + min);
+        System.out.println("Мінімум: " + min);
     }
 }
+
+
 ```
 
 ## StatisticalProcessingTask.java
@@ -93,7 +97,7 @@ public class StatisticalProcessingTask implements Runnable {
 
     @Override
     public void run() {
-        // Вычисление среднего значения
+        // Обчислення середнього значення
         double sum = 0;
         for (int num : numbers) {
             sum += num;
@@ -101,7 +105,7 @@ public class StatisticalProcessingTask implements Runnable {
         double average = sum / numbers.size();
         System.out.println("Среднее значение: " + average);
 
-        // Вычисление медианы
+        // Обчислення медіани
         int size = numbers.size();
         double median;
         if (size % 2 == 0) {
@@ -111,13 +115,13 @@ public class StatisticalProcessingTask implements Runnable {
         }
         System.out.println("Медиана: " + median);
 
-        // Вычисление стандартного отклонения
+        // Обчислення стандартного відхилення
         double variance = 0;
         for (int num : numbers) {
             variance += Math.pow(num - average, 2);
         }
         double standardDeviation = Math.sqrt(variance / size);
-        System.out.println("Стандартное отклонение: " + standardDeviation);
+        System.out.println("Стандартне відхилення: " + standardDeviation);
     }
 }
 ```
@@ -134,17 +138,17 @@ public class SerializationDemo {
     public static void main(String[] args) {
         CalculationResult result = new CalculationResult(10, 20, 200);
 
-        // Сохранение объекта в файл
+        // Збереження об'єкта у файл
         try (ObjectOutputStream outputStream = new ObjectOutputStream(new FileOutputStream("calculation_result.ser"))) {
             outputStream.writeObject(result);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        // Восстановление объекта из файла
+        // Відновлення об'єкта з файлу
         try (ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream("calculation_result.ser"))) {
             CalculationResult restoredResult = (CalculationResult) inputStream.readObject();
-            System.out.println("Restored result: " + restoredResult);
+            System.out.println("Відновлений результат: " + restoredResult);
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -166,51 +170,51 @@ import java.util.ArrayList;
 
 public class ParallelProcessingDemo {
     public static void main(String[] args) {
-        // Создание коллекции случайных чисел
+    // Створення колекції випадкових чисел
         List<Integer> numbers = generateRandomNumbers(100);
 
-        // Создание пула потоков для выполнения задач
-        ExecutorService executorService = Executors.newFixedThreadPool(5); // Увеличиваем количество потоков
+        // Створення пулу потоків до виконання завдань
+        ExecutorService executorService = Executors.newFixedThreadPool(5); // Збільшуємо кількість потоків
 
-        // Создание очереди задач
+        // Створення черги завдань
         BlockingQueue<Runnable> taskQueue = new LinkedBlockingQueue<>();
 
-        // Добавление задач в очередь
+        // Створення черги завдань
         taskQueue.add(new MinTask(numbers));
         taskQueue.add(new MaxTask(numbers));
         taskQueue.add(new AverageTask(numbers));
-        taskQueue.add(new CriteriaSelectionTask(numbers)); // Добавляем задачу для відбір за критерієм
-        taskQueue.add(new StatisticalProcessingTask(numbers)); // Добавляем задачу для статистична обробка
+        taskQueue.add(new CriteriaSelectionTask(numbers)); 
+        taskQueue.add(new StatisticalProcessingTask(numbers)); 
 
-        // Запуск рабочих потоков
-        for (int i = 0; i < 5; i++) { // Увеличиваем количество потоков
+        
+        for (int i = 0; i < 5; i++) { // Збільшуємо кількість потоків
             executorService.execute(new WorkerThread(taskQueue));
         }
 
-        // Завершение работы ExecutorService
+        
         executorService.shutdown();
 
-        // Получение выбора пользователя
+        
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Выберите операцию:");
-        System.out.println("1. Минимум");
+        System.out.println("Виберіть операцію:");
+        System.out.println("1. Мінімум");
         System.out.println("2. Максимум");
-        System.out.println("3. Среднее значение");
+        System.out.println("3. Среднеє значення");
         System.out.println("4. Відбір за критерієм");
         System.out.println("5. Статистична обробка");
         int choice = scanner.nextInt();
 
         switch (choice) {
             case 1:
-                System.out.println("Вы выбрали минимум:");
+                System.out.println("Ви обрали мінімум:");
                 taskQueue.add(new MinTask(numbers));
                 break;
             case 2:
-                System.out.println("Вы выбрали максимум:");
+                System.out.println("Ви обрали максимум:");
                 taskQueue.add(new MaxTask(numbers));
                 break;
             case 3:
-                System.out.println("Вы выбрали среднее значение:");
+                System.out.println("Ви вибрали середнє значення:");
                 taskQueue.add(new AverageTask(numbers));
                 break;
             case 4:
@@ -218,16 +222,16 @@ public class ParallelProcessingDemo {
                 taskQueue.add(new CriteriaSelectionTask(numbers));
                 break;
             case 5:
-                System.out.println("Вы выбрали статистична обробка:");
+                System.out.println("Ви вибрали статистична обробка:");
                 taskQueue.add(new StatisticalProcessingTask(numbers));
                 break;
             default:
-                System.out.println("Неверный выбор.");
+                System.out.println("Неправильний вибір.");
         }
         scanner.close();
     }
 
-    // Метод для генерации случайных чисел
+    //Метод для генерації випадкових чисел
     private static List<Integer> generateRandomNumbers(int count) {
         Random random = new Random();
         List<Integer> numbers = new ArrayList<>();
@@ -237,6 +241,7 @@ public class ParallelProcessingDemo {
         return numbers;
     }
 }
+
 ```
 
 ## ParallelProcessingDemoTest.java
@@ -264,54 +269,55 @@ public class ParallelProcessingDemoTest {
     }
 
     public static void testUserInput_MinimumOption() {
-        runTestWithUserInput("1", "Вы выбрали минимум:");
+        runTestWithUserInput("1", "Ви обрали мінімум:");
     }
 
     public static void testUserInput_MaximumOption() {
-        runTestWithUserInput("2", "Вы выбрали максимум:");
+        runTestWithUserInput("2", "Ви вибрали максимум:");
     }
 
     public static void testUserInput_AverageOption() {
-        runTestWithUserInput("3", "Вы выбрали среднее значение:");
+        runTestWithUserInput("3", "Ви вибрали середнє значення:");
     }
 
     public static void testUserInput_CriteriaSelectionOption() {
-        runTestWithUserInput("4", "Вы выбрали відбір за критерієм:");
+        runTestWithUserInput("4", "Ви обрали відбір за критерієм:");
     }
 
     public static void testUserInput_StatisticalProcessingOption() {
-        runTestWithUserInput("5", "Вы выбрали статистична обробка:");
+        runTestWithUserInput("5", "Ви вибрали статистична обробка:");
     }
 
-    // Метод для запуска теста с определенным вводом пользователя и ожидаемым выводом
+    // Метод для запуску тесту з певним введенням користувача та очікуваним висновком
     private static void runTestWithUserInput(String input, String expectedOutput) {
-        // Сохраняем стандартный поток вывода
+        // Зберігаємо стандартний потік виведення
         PrintStream originalOut = System.out;
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
 
-        // Подготовка ввода пользователя
+        // Підготовка введення користувача
         InputStream originalIn = System.in;
         System.setIn(new ByteArrayInputStream(input.getBytes()));
 
-        // Запуск тестируемого метода
+        // Запуск тестованого методу
         ParallelProcessingDemo.main(new String[]{});
 
-        // Восстанавливаем стандартные потоки
+        // Відновлюємо стандартні потоки
         System.setOut(originalOut);
         System.setIn(originalIn);
 
-        // Получаем вывод программы
+        // Отримуємо виведення програми
         String actualOutput = outContent.toString().trim();
 
-        // Проверяем вывод
+        // Перевіряємо висновок
         if (actualOutput.equals(expectedOutput)) {
-            System.out.println("Тест пройден успешно");
+            System.out.println("Тест пройдено успішно");
         } else {
-            System.out.println("Тест не пройден");
+            System.out.println("Тест не пройдено");
         }
     }
 }
+
 ```
 
 

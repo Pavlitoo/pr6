@@ -9,10 +9,10 @@ public class CalculationTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter parameter 1: ");
+        System.out.print("Введіть параметр 1: ");
         int parameter1 = scanner.nextInt();
 
-        System.out.print("Enter parameter 2: ");
+        System.out.print("Введіть параметр 2: ");
         int parameter2 = scanner.nextInt();
 
         // Обчислення результату
@@ -20,14 +20,14 @@ public class CalculationTest {
 
         CalculationResult resultObject = new CalculationResult(parameter1, parameter2, result);
 
-        // Тестирование результатов вычислений
+        // Тестування результатів обчислень
         if (resultObject.getResult() != result) {
-            throw new AssertionError("Calculation result is incorrect");
+            throw new AssertionError("Результат розрахунку невірний");
         } else {
-            System.out.println("Calculatio5 10n result is correct: " + resultObject.getResult());
+            System.out.println("Результат розрахунку правильний: " + resultObject.getResult());
         }
 
-        // Создание объекта для отображения результатов в виде таблицы
+        // Створення об'єкта для відображення результатів у вигляді таблиці
         TextTableResultDisplay resultDisplay = new TextTableResultDisplay();
         resultDisplay.displayTable(resultObject, 1, 3);
 

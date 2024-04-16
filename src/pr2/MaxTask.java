@@ -12,7 +12,7 @@ public class MaxTask implements Runnable {
     @Override
     public void run() {
         int max = numbers.stream().max(Integer::compareTo).orElse(0);
-        System.out.println("Maximum: " + max);
+        System.out.println("Максімум: " + max);
     }
 }
 

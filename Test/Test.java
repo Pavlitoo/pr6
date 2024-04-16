@@ -3,7 +3,8 @@ package Test;
 import java.util.ArrayList;
 import java.util.List;
 import pr2.*;
-// Test.java
+
+
 public class Test {
     public static void main(String[] args) {
         CommandManager commandManager = CommandManager.getInstance();
